@@ -6,7 +6,34 @@ import pandas as pd
 app = Flask(__name__)
 geolocator = Nominatim(user_agent="geoapiExercises")
 app.config['JSON_AS_ASCII'] = False
-@app.route("/upload", methods=['GET', 'POST'])
+
+@app.route("/python/", methods=['GET', 'POST'])
+def upload_filee():
+    
+    return ''' <!doctype html>
+    <style>
+    a.button {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    text-decoration: none;
+    color: initial;
+    }</style>
+   
+    <form action="post" method="get">
+      <label for="lat">Latitude:</label>
+      <input type="text" id="lat" name="lat"><br><br>
+      <label for="long">Longtide:</label>
+      <input type="text" id="long" name="long"><br><br>
+      <input type="submit" value="Adres Bul">
+      <title>Upload an excel file</title>
+    <button><a href="upload" class="button">Dosya Yükle</a></button>
+    </form>
+     
+    '''
+
+
+@app.route("/python/upload", methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
         # class adresses: 
@@ -30,10 +57,15 @@ def upload_file():
     <p><input type=file name=file><input type=submit value=Upload>
     </form>'''
 
-@app.route('/post/<string:lat>,<string:long>')
-def show_post(lat, long):
+@app.route('/python/post')
+def show_post():
+    lat = str(request.args.get('lat'))
+    long = str(request.args.get('long'))
+    
     adress = str(geolocator.reverse(lat+","+long))
-    return f'{adress}'
+    return jsonify({'adress':adress})
+
+    
 
 if __name__ == "__main__":
     app.run()
