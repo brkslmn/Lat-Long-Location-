@@ -26,9 +26,9 @@ def upload_filee():
       <label for="long">Longtide:</label>
       <input type="text" id="long" name="long"><br><br>
       <input type="submit" value="Adres Bul">
-      <title>Upload an excel file</title>
-    <button><a href="upload" class="button">Dosya Yükle</a></button>
     </form>
+    <title>Upload an excel file</title>
+    <button><a href="upload" class="button">Dosya Yükle</a></button>
      
     '''
 
