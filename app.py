@@ -16,19 +16,20 @@ def upload_filee():
     -webkit-appearance: button;
     -moz-appearance: button;
     appearance: button;
-
     text-decoration: none;
     color: initial;
     }</style>
-    <title>Upload an excel file</title>
-    <a href="upload" class="button">Dosya Yükle</a>
+   
     <form action="post" method="get">
-      <label for="lat">First name:</label>
+      <label for="lat">Latitude:</label>
       <input type="text" id="lat" name="lat"><br><br>
-      <label for="long">Last name:</label>
+      <label for="long">Longtide:</label>
       <input type="text" id="long" name="long"><br><br>
-      <input type="submit" value="Submit">
+      <input type="submit" value="Adres Bul">
+      <title>Upload an excel file</title>
+    <button><a href="upload" class="button">Dosya Yükle</a></button>
     </form>
+     
     '''
 
 
@@ -60,16 +61,10 @@ def upload_file():
 def show_post():
     lat = str(request.args.get('lat'))
     long = str(request.args.get('long'))
-    try:
-        adress = str(geolocator.reverse(lat+","+long))
-        response = app.response_class(
-            response=json.dumps(data),
-            status=200,
-            mimetype='application/json'
-        )
-        return  adress, 200
-    except:
-        return print("An exception occurred")
+    
+    adress = str(geolocator.reverse(lat+","+long))
+    return jsonify({'adress':adress})
+
     
 
 if __name__ == "__main__":
